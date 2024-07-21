@@ -36,3 +36,11 @@ https://latex.codecogs.com/gif.latex?a_i%20%3D%20f%28vk%29
 $$a_i = f \left( vk \right)$$
 
 So, looking backwards, I can say Those entries could correspond to axons of other neurons.
+
+## The activation function
+
+What form, or rather, what is the nature of this function? The activation function is the transfer function between neurons.
+
+The answer is that there is no single activation function used, and the activation function is selected according to the desired behaviour by experimentation.
+
+Please see the page: https://github.com/fllaryora/CNN-and-C-/blob/main/Activation_function.md
