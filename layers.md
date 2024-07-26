@@ -45,4 +45,13 @@ In the page https://github.com/fllaryora/CNN-and-C-/blob/main/Activation_functio
 In the page https://github.com/fllaryora/CNN-and-C-/blob/main/Activation_function.md
  I explained that the activation function of a neuron must be continuously differentiable, because a backpropagation algorithm is employed which is based on the descending gradient. The descending gradient used on a curve points to a local minimum (that is why the method is stochastic, and does not guarantee that it points to a global minimum).
 
- 
+ The error calculation functions are fed from the output of the last layer.
+For instance,
+ Suppose I have a neural network where the outcome says whether the picture (the input) I show to it (the fucking Ann) is of a healthy cell or a cancer cell,
+ So in the last layer I must have 2 neurons:
+ - where one neuron is for the healthy cell which is activated when the healthy cell is shown.
+ - and the other neuron is for the cancer cell which is activated when the cancer cell is shown.
+  In this example, When I show the picture of a healthy cell to an untrained neural network, the outcome will be unknown. In other words there are a gap between the desired result and the actual result. I will look for the minimization of that gap. 
+
+<img src="gap-calculator.png" alt="Image of a neuron" />
+
