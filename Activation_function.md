@@ -54,7 +54,7 @@ In the case of backpropagation, it is based on the stochastic gradient descent (
 
 Gradient descent was originally proposed by CAUCHY in 1847. It is also known as the steepest descent.
 
-<img src="SGD.png" alt="Image of a neuron" style="height: 400px; width:400px;"/>
+<img src="SGD.png" alt="Image of a neuron" />
 
 Here I am suppoussing we have a single neuron:
 
