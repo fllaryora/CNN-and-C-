@@ -30,3 +30,19 @@ The 2-D array W is e times I and if you have bias add I to the result.
 So, For instance If I have 3 entries and 6 neurons the size of W is 18, ans if we have bias, 24.
 
 My idea is to explain layers typical of a CNN in future pages md.
+
+# Softmax amd other colective activation function case
+In the page https://github.com/fllaryora/CNN-and-C-/blob/main/Activation_function.md
+ I explained that the activation function of a neuron can depend on a single neuron or depend on all the neurons of the layer.
+ So I made a image to make it clear about what happen with the interconnection:
+ 
+ <img src="softmax.png" alt="Image of a neuron" />
+
+ The layer K, is the last layer of my ANN, and I use a softmax function because I want to use my ANN as a classificator. For instance The input image is a Dog or a  Cat or a door.
+ 
+# The LOSS curve
+
+In the page https://github.com/fllaryora/CNN-and-C-/blob/main/Activation_function.md
+ I explained that the activation function of a neuron must be continuously differentiable, because a backpropagation algorithm is employed which is based on the descending gradient. The descending gradient used on a curve points to a local minimum (that is why the method is stochastic, and does not guarantee that it points to a global minimum).
+
+ 
