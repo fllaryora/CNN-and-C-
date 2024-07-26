@@ -44,3 +44,7 @@ What form, or rather, what is the nature of this function? The activation functi
 The answer is that there is no single activation function used, and the activation function is selected according to the desired behaviour by experimentation.
 
 Please see the page: https://github.com/fllaryora/CNN-and-C-/blob/main/Activation_function.md
+
+## ANN layer
+
+Please see the page: https://github.com/fllaryora/CNN-and-C-/blob/main/layers.md
