@@ -40,6 +40,27 @@ In the page https://github.com/fllaryora/CNN-and-C-/blob/main/Activation_functio
 
  The layer K, is the last layer of my ANN, and I use a softmax function because I want to use my ANN as a classificator. For instance The input image is a Dog or a  Cat or a door.
  
+# Forward Pass (Index Notation)
+
+## Notation
+
+$$W_{ij}^{(l)}$$ Weight from neuron j in layer l-1 to neuron i in layer l.
+
+$$b_{i}^{(l)}$$ : Bias for neuron i in layer l.
+
+$$x_{i}^{(l)}$$ : Activation of neuron i in layer l.
+
+$$z_{i}^{(l)}$$ : Pre-activation of neuron i in layer l, with j entries, where 
+
+![dsda](https://latex.codecogs.com/svg.image?z_i^{(l)}=\sum&space;_j&space;W_{ij}^{(l)}x_j^{(l-1)}&plus;b_i^{(l)})
+
+$$\sigma_{i}^{(l)}(z_{i}^{(l)})$$: Activation function.
+
+![fsdf](https://latex.codecogs.com/svg.image?\hat{y}_i=\sigma_{i}^{(l)}(z_{i}^{(l)}))​: Predicted output for neuron i.
+
+
+$$y_i$$: True label for neuron i. The expected value.
+
 # The LOSS curve
 
 In the page https://github.com/fllaryora/CNN-and-C-/blob/main/Activation_function.md
