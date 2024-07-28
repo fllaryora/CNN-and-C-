@@ -20,58 +20,58 @@ $$\frac{\partial MSE}{\partial W_{ij}^{l}}$$
 the rate of change of the lost error function with respect to the given connective weight, so we can minimize it.
 Now we consider two cases, the output of the network and the output of some middle hidden layer.
 
-Notation
+## Notation
 
-$$W_{jk}$$​: Element at row j(neurons), column k (entries) of the weight matrix W.
+$$W_{ij}^{(l)}$$ Weight from neuron j in layer l-1 to neuron i in layer l.
 
-$$X_{ik}$$: Element at row i(samples), column k (entries)of the input matrix X.
+$$b_{i}^{(l)}$$ : Bias for neuron i in layer l.
 
-$$z_i = \sum_{k=1}^{m} X_{ik}W_{jk} + b_j$$​: Linear combination for the i-th sample.
+$$x_{i}^{(l)}$$ : Activation of neuron i in layer l.
 
-$$\hat{y}_i = f(z_i)$$​: Predicted output for the i-th sample.
+$$z_{i}^{(l)}$$ : Pre-activation of neuron i in **hidden layer** l, with j entries, where 
 
-$$y_i$$: True label for the i-th sample.
+![dsda](https://latex.codecogs.com/svg.image?z_i^{(l)}=\sum&space;_j&space;W_{ij}^{(l)}x_j^{(l-1)}&plus;b_i^{(l)})
 
-f: Activation function.
+$$z_{k}^{(L)}$$ : Pre-activation of neuron k in **output layer** L, with j entries, where 
 
-f′: Derivative of the activation function.
+![dsda](https://latex.codecogs.com/svg.image?z_k^{(L)}=\sum&space;_j&space;W_{kj}^{(L)}x_j^{(L-1)}&plus;b_k^{(L)})
 
-$$\text{MSE} = \frac{1}{n} \sum_{i=1}^{n} (y_i - \hat{y}_i)^2$$ : the Mean Square Error (MSE)
+$$\sigma_{i}^{(l)}(z_{i}^{(l)})$$: Activation function in **hidden layer** l.
 
-**first** Derivative of MSE with Respect to $$\hat{y}_i$$
-
-$$\frac{\partial \text{MSE}}{\partial \hat{y}_i} = \frac{2}{n} (\hat{y}_i - y_i)$$
-
-**Second**  Derivative of $$\hat{y}_i$$ with Respect to $$z_i$$
-
-$$\frac{\partial \hat{y}_i}{\partial z_i} = f'(z_i)$$
-
-(we saw examples of this in the activation function page)
-
-**third** this is the harder step for my brain: Derivative of $$z_i$$​ with Respect to $$W_{jk}$$​:
-
-$$\frac{\partial z_i}{\partial W_{jk}} = X_{ij}$$
-
-**fourth** Chain Rule for Partial Derivative of MSE with Respect to $$W_{jk}$$​:
-
-![ahh](https://latex.codecogs.com/svg.image?\frac{\partial\text{MSE}}{\partial&space;W_{jk}}=\frac{1}{n}\sum_{i=1}^{n}\frac{\partial\text{MSE}}{\partial\hat{y}_i}\cdot\frac{\partial\hat{y}_i}{\partial&space;z_i}\cdot\frac{\partial&space;z_i}{\partial&space;W_{jk}})
-
-**fifth** Substituting the derivatives:
-
-![ahh](https://latex.codecogs.com/svg.image?\frac{\partial\text{MSE}}{\partial&space;W_{jk}}=\frac{2}{n}\sum_{i=1}^{n}(\hat{y}_i-y_i)\cdot&space;f'(z_i)\cdot&space;X_{ij})
-
-**6**Derivative of $$z_i$$​ with Respect to b (that layer has j neurons)
-
-$$\frac{\partial z_i}{\partial b_j} = 1$$
-
-**7** Chain Rule for Partial Derivative of MSE with Respect to b
-
-![ahh](https://latex.codecogs.com/svg.image?\frac{\partial\text{MSE}}{\partial&space;b_j}=\frac{1}{n}\sum_{i=1}^{n}\frac{\partial\text{MSE}}{\partial\hat{y}_i}\cdot\frac{\partial\hat{y}_i}{\partial&space;z_i}\cdot\frac{\partial&space;z_i}{\partial&space;b_j})
+![fsdf](https://latex.codecogs.com/svg.image?\hat{y}_k=\sigma_{k}^{(L)}(z_{k}^{(L)}))​: Activation function in **output layer** L..Predicted output for neuron i.
 
 
-**8** Substituting the derivatives:
+$$y_k$$: True label for neuron k. The expected value.
 
-![ahh](https://latex.codecogs.com/svg.image?\frac{\partial\text{MSE}}{\partial&space;b_j}=\frac{2}{n}\sum_{i=1}^{n}(\hat{y}_i-y_i)\cdot&space;f'(z_i))
+$$\text{MSE} = \frac{1}{k} \sum_{i=1}^{k} (y_k - \hat{y}_k)^2$$ : the Mean Square Error (MSE) With n neurons in the last layer.
+
+## Backward Pass: Derivatives
+### Derivative of MSE with Respect to Output Layer Weights $$W_{jk}^{(L)}$$
+
+Chain Rule for Partial Derivative of MSE with Respect to $$W_{jk}$$​:
+
+![ahh](https://latex.codecogs.com/svg.image?\frac{\partial\text{MSE}}{\partial&space;W_{jk}}=\frac{\partial\text{MSE}}{\partial\hat{y}_k}\cdot\frac{\partial\hat{y}_k}{\partial&space;z_k}\cdot\frac{\partial&space;z_k}{\partial&space;W_{jk}})
+
+Chain Rule for Partial Derivative of MSE with Respect to $$b_{k}$$​:
+
+![ahh](https://latex.codecogs.com/svg.image?\frac{\partial\text{MSE}}{\partial&space;b_k}=\frac{\partial\text{MSE}}{\partial\hat{y}_k}\cdot\frac{\partial\hat{y}_k}{\partial&space;z_k}\cdot\frac{\partial&space;z_k}{\partial&space;b_k})
+
+Auxiliar calculous:
+
+$$\frac{\partial \hat{y}_i}{\partial z_i^{(L)}} = \sigma'(z_i^{(L)})$$
+
+$$\frac{\partial z_k}{\partial b_k} = 1$$
+
+$$\frac{\partial z_k}{\partial W_{kj}} = x_{j}^{(L-1)}$$
+
+![sdasda](https://latex.codecogs.com/svg.image?\frac{\partial\text{MSE}}{\partial\hat{y}_k^{(L)}}=\frac{1}{n}\frac{\partial}{\partial\hat{y}_k^{(L)}}((y_1-\hat{y}_1)^2&plus;...&plus;(y_k-\hat{y}_k)^2&plus;...&plus;(y_K-\hat{y}_K)^2))
+
+The other part that are not k, are 0. And apply substitution. with the chain rule to get:
+
+$$\frac{\partial \text{MSE}}{\partial \hat{y}_k^{(L)}} = \frac{-2}{n} (y_k - \hat{y}_k )$$
+
+#### Error Signal for Output Neuron k:
+
 
 ## Binary Cross Entropy method for Classification
 
