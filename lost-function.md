@@ -64,13 +64,24 @@ $$\frac{\partial z_k}{\partial b_k} = 1$$
 
 $$\frac{\partial z_k}{\partial W_{kj}} = x_{j}^{(L-1)}$$
 
-![sdasda](https://latex.codecogs.com/svg.image?\frac{\partial\text{MSE}}{\partial\hat{y}_k^{(L)}}=\frac{1}{n}\frac{\partial}{\partial\hat{y}_k^{(L)}}((y_1-\hat{y}_1)^2&plus;...&plus;(y_k-\hat{y}_k)^2&plus;...&plus;(y_K-\hat{y}_K)^2))
+![sdasda](https://latex.codecogs.com/svg.image?\frac{\partial\text{MSE}}{\partial\hat{y}_k^{(L)}}=\frac{1}{K}\frac{\partial}{\partial\hat{y}_k^{(L)}}((y_1-\hat{y}_1)^2&plus;...&plus;(y_k-\hat{y}_k)^2&plus;...&plus;(y_K-\hat{y}_K)^2))
 
 The other part that are not k, are 0. And apply substitution. with the chain rule to get:
 
 $$\frac{\partial \text{MSE}}{\partial \hat{y}_k^{(L)}} = \frac{-2}{n} (y_k - \hat{y}_k )$$
 
 #### Error Signal for Output Neuron k:
+
+![dadasda](https://latex.codecogs.com/svg.image?\delta_k^{(L)}=\frac{\partial\text{MSE}}{\partial\hat{y}_k}\cdot\frac{\partial\hat{y}_k}{\partial&space;z_k}=-\frac{2}{K}(y_k-\hat{y}_k)\cdot\sigma'(z_k^{(L)}))
+
+#### Gradient for Weights $$W_{jk}^{(L)}$$
+
+![adsasd](https://latex.codecogs.com/svg.image?\frac{\partial\text{MSE}}{\partial&space;W_{jk}^{(L)}}=\delta_k^{(L)}\cdot\frac{\partial&space;z_k}{\partial&space;W_{jk}^{(L)}}=\delta_k^{(L)}\cdot&space;x_{j}^{(L-1)})
+
+### Derivative of MSE with Respect to Hideen Layer Weights $$W_{ij}^{(l)}$$
+
+
+#### Error Signal for hidden Neuron i:
 
 
 ## Binary Cross Entropy method for Classification
