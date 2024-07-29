@@ -102,12 +102,17 @@ $$\frac{\partial z_i^{(l)}}{\partial b_i^{(l)}} = 1$$
 
 $$\frac{\partial z_i^{(l)}}{\partial W_{ij}^{(l)}} = x_{j}^{(l-1)}$$
 
+$$\frac{\partial z_j^{(l+1)}}{\partial x_{i}^{(l)}} = W_{ki}^{(l+1)}$$
+
+$$\frac{\partial\text{MSE}}{\partial z_{k}^{(l+1)}} = \delta _k ^{(l+1)}$$
+
 #### Error Signal for hidden Neuron i:
+
 
 
 ## Binary Cross Entropy method for Classification
 
-![Bin](https://latex.codecogs.com/svg.image?&space;BinaryCrossEntropy(\vec{y},\vec{\hat{y}})=\frac{1}{K}\sum_{k=1}^{K}{y_i\log_{e}\hat{y}_i&plus;(1-y_i)\log_{e}(1-y_i)})
+![Bin](https://latex.codecogs.com/svg.image?&space;BinaryCrossEntropy(\vec{y},\vec{\hat{y}})=\frac{1}{K}\sum_{k=1}^{K}{y_k\log_{e}\hat{y}_k&plus;(1-y_k)\log_{e}(1-y_k)})
 
 This method is based on the bernoulli distribution .
 Binary Cross Entropy is the value for the entire output layer, it is not the individual error for each neuron.
