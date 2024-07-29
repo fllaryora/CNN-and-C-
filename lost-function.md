@@ -74,12 +74,33 @@ $$\frac{\partial \text{MSE}}{\partial \hat{y}_k^{(L)}} = \frac{-2}{n} (y_k - \ha
 
 ![dadasda](https://latex.codecogs.com/svg.image?\delta_k^{(L)}=\frac{\partial\text{MSE}}{\partial\hat{y}_k}\cdot\frac{\partial\hat{y}_k}{\partial&space;z_k}=-\frac{2}{K}(y_k-\hat{y}_k)\cdot\sigma'(z_k^{(L)}))
 
+<img src="MES-output.drawio.png" alt="Image of a neuron" />
+
+
 #### Gradient for Weights $$W_{jk}^{(L)}$$
 
 ![adsasd](https://latex.codecogs.com/svg.image?\frac{\partial\text{MSE}}{\partial&space;W_{jk}^{(L)}}=\delta_k^{(L)}\cdot\frac{\partial&space;z_k}{\partial&space;W_{jk}^{(L)}}=\delta_k^{(L)}\cdot&space;x_{j}^{(L-1)})
 
 ### Derivative of MSE with Respect to Hideen Layer Weights $$W_{ij}^{(l)}$$
 
+Propagate the error backward through the network. For each hidden layer, compute the error (gradient) with respect to the output of that layer using the error from the next layer and the weights connecting the layers.
+ 
+The error in the hidden layer is calculated by propagating the next layer error back through the weights, applying the chain rule. The layer l has I neurons index i, and the layer l+1 has K neuton index k.
+
+
+![dsad](https://latex.codecogs.com/svg.image?\frac{\partial\text{MSE}}{\partial&space;W_{ij}^{(l)}}=\sum_{k=1}^{K}\left(\frac{\partial\text{MSE}}{\partial&space;z_{k}^{(l&plus;1)}}\cdot\frac{\partial&space;z_k^{(l&plus;1)}}{\partial&space;x_{i}^{(l)}}\right)\cdot\frac{\partial&space;x_i^{(l)}}{\partial&space;z_{i}^{(l)}}\cdot\frac{\partial&space;z_i^{(l)}}{\partial&space;W_{ij}^{(l)}})
+
+![dsad](https://latex.codecogs.com/svg.image?\frac{\partial\text{MSE}}{\partial&space;b_{i}^{(l)}}=\sum_{k=1}^{K}\left(\frac{\partial\text{MSE}}{\partial&space;z_{k}^{(l&plus;1)}}\cdot\frac{\partial&space;z_k^{(l&plus;1)}}{\partial&space;x_{i}^{(l)}}\right)\cdot\frac{\partial&space;x_i^{(l)}}{\partial&space;z_{i}^{(l)}}\cdot\frac{\partial&space;z_i^{(l)}}{\partial&space;b_{i}^{(l)}})
+
+<img src="hidden.drawio.png" alt="Image of a neuron" />
+
+Auxiliar calculous:
+
+$$\frac{\partial x_i^{(l)}}{\partial z_i^{(l)}} = \sigma'(z_i^{(l)})$$
+
+$$\frac{\partial z_i^{(l)}}{\partial b_i^{(l)}} = 1$$
+
+$$\frac{\partial z_i^{(l)}}{\partial W_{ij}^{(l)}} = x_{j}^{(l-1)}$$
 
 #### Error Signal for hidden Neuron i:
 
