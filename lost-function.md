@@ -108,7 +108,14 @@ $$\frac{\partial\text{MSE}}{\partial z_{k}^{(l+1)}} = \delta _k ^{(l+1)}$$
 
 #### Error Signal for hidden Neuron i:
 
+![das](https://latex.codecogs.com/svg.image?\delta&space;_i^{(l)}=\sum_{k=1}^{K}\left(\delta&space;_k^{(l&plus;1)}\cdot&space;W_{ki}^{(l&plus;1)}\right)\cdot\varphi'(z_i^{(l)}))
 
+![upite](https://latex.codecogs.com/svg.image?\frac{\partial\text{MSE}}{\partial&space;W_{ij}^{(l)}}=\delta&space;_i^{(l)}\cdot&space;x_j^{(l-1)})
+
+
+![upite](https://latex.codecogs.com/svg.image?\frac{\partial\text{MSE}}{\partial&space;b_{j}^{(l)}}=\delta&space;_i^{(l)})
+
+Why the fuck I spent time with this calculous? Because I will use it in back propagation in a further page.
 
 ## Binary Cross Entropy method for Classification
 
@@ -116,6 +123,7 @@ $$\frac{\partial\text{MSE}}{\partial z_{k}^{(l+1)}} = \delta _k ^{(l+1)}$$
 
 This method is based on the bernoulli distribution .
 Binary Cross Entropy is the value for the entire output layer, it is not the individual error for each neuron.
+
 
 ## Categorical Cross Entropy method for Classification must end only in one category 
 
