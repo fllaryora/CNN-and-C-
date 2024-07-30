@@ -138,4 +138,34 @@ $$\frac{\partial \text{BCE}}{\partial \hat{y}_k^{(L)}} = \frac{-1}{K} ( \frac{y_
 
 ## Categorical Cross Entropy method for Classification must end only in one category 
 
+I spent a year swallowing bullshit while learning  linear algebra calling a vector in defferents ways by its properties.
+And then in machine learning do the same shit.
+For a classification problem with K categories (or classes), each category is represented by a unique binary vector of length K with a single element set to 1 (hot) and all others set to 0 (cold).
+A **one-hot encoded vector** is a way to represent categorical data as binary vectors. 
+
+Example
+
+Suppose we have 3 categories: Cat, Dog, and Bird. The one-hot encoding for each category would be:
+
+    Cat: [1,0,0]
+    Dog: [0,1,0]
+    Bird: [0,0,1]
+    
 ![Cat](https://latex.codecogs.com/svg.image?&space;CategoricalCrossEntropy(\vec{y},\vec{\hat{y}})=-\frac{1}{K}\sum_{k=1}^{K}{y_k\log_{e}\hat{y}_k})
+
+### Notation
+
+$$y_k$$: True label for neuron k. The expected value. **is the actual binary label (0 or 1)**
+$$\vec{y}$$: True label for the output layer. The expected value. **one-hot encoded vector**
+
+$$\hat{y}_k$$:  is the predicted **probability**  [0,1) for class k. This is not an insignificant point, as put one's shoulder to the wheel and adds an important constraint to our activation function: the output is between 0 and 1. 
+
+### Derivative of CCE with Respect to $$\hat{y}_k$$:
+
+$$\frac{\partial \text{CCE}}{\partial \hat{y}_k^{(L)}} = - \frac{y_k}{\hat{y}_k}$$
+
+![dadasda](https://latex.codecogs.com/svg.image?\delta_k^{(L)}=\frac{\partial\text{CCE}}{\partial\hat{y}_k}\cdot\frac{\partial\hat{y}_k}{\partial&space;z_k}=-\frac{y_k}{\hat{y}_k}\cdot\sigma'(z_k^{(L)}))
+
+If you did your homework well and your activation function is softmax...
+
+
