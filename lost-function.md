@@ -168,4 +168,13 @@ $$\frac{\partial \text{CCE}}{\partial \hat{y}_k^{(L)}} = - \frac{y_k}{\hat{y}_k}
 
 If you did your homework well and your activation function is softmax...
 
+![softmax](https://latex.codecogs.com/png.latex?\hat{y}_k^{(L)}=\sigma(Z^{(L)})_k=\frac{e^{z_k^{(L)}}}{\sum_{m=1}^{K}e^{z_m^{L)
 
+![softmax](https://latex.codecogs.com/svg.image?\frac{\partial&space;\sigma\left({Z^{(L)}}\right)_k}{\partial&space;z^{(L)}_{j}}=\sigma\left({Z^{(L)}}\right)_k\cdot\left(\delta&space;_{ij}-\sigma\left({Z^{(L)}}\right)_j\right))
+
+$$ \delta _{ij}={\begin{cases}0&{\text{if }}i\neq j,\\
+1&{\text{if }}i=j.\end{cases}} $$
+
+![softmax](https://latex.codecogs.com/svg.image?\frac{\partial&space;\hat{y}_k^{(L)}}{\partial&space;z^{(L)}_{j}}=\hat{y}_k^{(L)}\cdot\left(\delta&space;_{ij}-\hat{y}_j^{(L)}\right))
+
+$$\delta_k^{(L)}=\hat{y}_k-y_k$$
