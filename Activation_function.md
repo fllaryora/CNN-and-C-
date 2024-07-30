@@ -153,7 +153,7 @@ https://latex.codecogs.com/svg.image?softmax(vk)_i=\frac{e^{vk_i}}{\sum_{j=1}^{K
 
 ![softmax](https://latex.codecogs.com/png.latex?\sigma(\mathbf{vk})_i=\frac{e^{vk_i}}{\sum_{j=1}^{K}e^{vk_j}})
 
-![softmax](https://latex.codecogs.com/svg.image?softmax'(\vec{vk})_i=\frac{\partial&space;softmax\left({\vec{vk}}\right)_i}{\partial&space;x_{j}}=softmax_{i}\left({\vec{x}}\right)\left(\delta&space;_{ij}-softmax_{j}\left({\vec{x}}\right)\right))
+![softmax](https://latex.codecogs.com/svg.image?softmax'(\vec{vk})_i=\frac{\partial&space;softmax\left({\vec{vk}}\right)_i}{\partial&space;vk_{j}}=softmax_{i}\left({\vec{x}}\right)\left(\delta&space;_{ij}-softmax_{j}\left({\vec{x}}\right)\right))
 
 $$ \delta _{ij}={\begin{cases}0&{\text{if }}i\neq j,\\
 1&{\text{if }}i=j.\end{cases}} $$
