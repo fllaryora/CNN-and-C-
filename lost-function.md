@@ -20,7 +20,7 @@ $$\frac{\partial MSE}{\partial W_{ij}^{l}}$$
 the rate of change of the lost error function with respect to the given connective weight, so we can minimize it.
 Now we consider two cases, the output of the network and the output of some middle hidden layer.
 
-## Notation
+### Notation
 
 $$W_{ij}^{(l)}$$ Weight from neuron j in layer l-1 to neuron i in layer l.
 
@@ -38,8 +38,7 @@ $$z_{k}^{(L)}$$ : Pre-activation of neuron k in **output layer** L, with j entri
 
 $$\sigma_{i}^{(l)}(z_{i}^{(l)})$$: Activation function in **hidden layer** l.
 
-![fsdf](https://latex.codecogs.com/svg.image?\hat{y}_k=\sigma_{k}^{(L)}(z_{k}^{(L)}))​: Activation function in **output layer** L..Predicted output for neuron i.
-
+![fsdf](https://latex.codecogs.com/svg.image?\hat{y}_k=\sigma_{k}^{(L)}(z_{k}^{(L)}))​: Activation function in **output layer** L.Predicted output for neuron i.
 
 $$y_k$$: True label for neuron k. The expected value.
 
@@ -119,12 +118,24 @@ Why the fuck I spent time with this calculous? Because I will use it in back pro
 
 ## Binary Cross Entropy method for Classification
 
-![Bin](https://latex.codecogs.com/svg.image?&space;BinaryCrossEntropy(\vec{y},\vec{\hat{y}})=\frac{1}{K}\sum_{k=1}^{K}{y_k\log_{e}\hat{y}_k&plus;(1-y_k)\log_{e}(1-y_k)})
+![Bin](https://latex.codecogs.com/svg.image?&space;BinaryCrossEntropy(\vec{y},\vec{\hat{y}})=-\frac{1}{K}\sum_{k=1}^{K}({y_k\log_{e}\hat{y}_k&plus;(1-y_k)\log_{e}(1-y_k)}))
 
 This method is based on the bernoulli distribution .
 Binary Cross Entropy is the value for the entire output layer, it is not the individual error for each neuron.
 
+### Notation
+
+$$y_k$$: True label for neuron k. The expected value. **is the actual binary label (0 or 1)**
+
+![fsdf](https://latex.codecogs.com/svg.image?\hat{y}_k=\sigma_{k}^{(L)}(z_{k}^{(L)}))​: Activation function in **output layer** L.Predicted output for neuron i.
+
+### Derivative of BCE with Respect to $$\hat{y}_k$$
+
+$$\frac{\partial \text{BCE}}{\partial \hat{y}_k^{(L)}} = \frac{-1}{K} ( \frac{y_k}{\hat{y}_k} - \frac{1-y_k}{1-\hat{y}_k} )$$
+
+
+![dadasda](https://latex.codecogs.com/svg.image?\delta_k^{(L)}=\frac{\partial\text{BCE}}{\partial\hat{y}_k}\cdot\frac{\partial\hat{y}_k}{\partial&space;z_k}=\frac{-1}{K}(\frac{y_k}{\hat{y}_k}-\frac{1-y_k}{1-\hat{y}_k})\cdot\sigma'(z_k^{(L)}))
 
 ## Categorical Cross Entropy method for Classification must end only in one category 
 
-![Cat](https://latex.codecogs.com/svg.image?&space;CategoricalCrossEntropy(\vec{y},\vec{\hat{y}})=-\frac{1}{K}\sum_{c=1}^{C}\sum_{k=1}^{K}{y_c_k\log_{e}\hat{y}_i})
+![Cat](https://latex.codecogs.com/svg.image?&space;CategoricalCrossEntropy(\vec{y},\vec{\hat{y}})=-\frac{1}{K}\sum_{k=1}^{K}{y_k\log_{e}\hat{y}_k})
