@@ -47,4 +47,5 @@ Please see the page: https://github.com/fllaryora/CNN-and-C-/blob/main/Activatio
 
 ## ANN layer
 
-Please see the page: https://github.com/fllaryora/CNN-and-C-/blob/main/layers.md
+Please see the page to see equation of layer: https://github.com/fllaryora/CNN-and-C-/blob/main/layers.md
+Please see the page to calculate the error of the layer: https://github.com/fllaryora/CNN-and-C-/blob/main/lost-function.md
