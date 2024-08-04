@@ -49,3 +49,8 @@ Please see the page: https://github.com/fllaryora/CNN-and-C-/blob/main/Activatio
 
 Please see the page to see equation of layer: https://github.com/fllaryora/CNN-and-C-/blob/main/layers.md
 Please see the page to calculate the error of the layer: https://github.com/fllaryora/CNN-and-C-/blob/main/lost-function.md
+
+## Optimization (learning)
+
+The time has come. It is time to tell you how backpropagation works and If you read my ANN repo, you will find that I made maths mistake. A math mistake means code mistake.
+**If you find a math mistake in my code tell me the right equation.**
