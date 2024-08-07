@@ -28,17 +28,23 @@ enum class LossFunction {
 
 
 class FullyConnectedLayer{
-public:
 
 public:
-  FullyConnectedLayer(int numInputs, int numNeurons, ActivationFunction activation,
-                      LossFunction loss, bool useBias);
+  FullyConnectedLayer(
+    int numInputs,
+    int numNeurons,
+    ActivationFunction activation,
+    LossFunction loss,
+    bool useBias
+  );
 
   ~FullyConnectedLayer();
 
   // Public methods
   std::vector<double> forward(const std::vector<double>& input) const;
-  double calculateLoss(const std::vector<double>& input, const std::vector<double>& predicted);
+  double calculateLoss(
+    const std::vector<double>& input,
+    const std::vector<double>& predicted);
 
   // Getters for internal state (optional)
   double* getWeights() const;
@@ -46,7 +52,8 @@ public:
   ActivationFunction getActivationFunction() const;
   LossFunction getLossFunction() const;
 
- private:
+ //private:
+ protected:
      int numInputs;             // Number of input entries
      int numNeurons;            // Number of neurons in the layer
      bool useBias;              // Whether to use bias
@@ -56,8 +63,8 @@ public:
      double* weights;           // Dynamically allocated array for weights
      double* biases;            // Dynamically allocated array for biases
      // Private methods
-     double activate(double x) const;
-     void softmax(std::vector<double>& output) const;
+     double activate(double zPreactivation) const;
+     std::vector<double> softmax(const std::vector<double>& zPreactivationArray) const;
      double computeLoss(const std::vector<double>& input, const std::vector<double>& predicted) const;
 };
 

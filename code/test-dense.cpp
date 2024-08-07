@@ -164,6 +164,7 @@ void tSoftmax(){
   std::vector<double> softmaxInput = {1.0, 2.0, 3.0};
   std::vector<double> expectedSoftmaxOutput = {0.0900306, 0.244728, 0.665241}; // Known softmax outputs for these inputs
   std::vector<double> softmaxOutput = softmaxLayer.forward(softmaxInput);
+  printVector(softmaxOutput, "Softmax Output");
   assert(compareVectors(softmaxOutput, expectedSoftmaxOutput));
   std::cout << "SOFTMAX test passed successfully!" << std::endl;
 }
