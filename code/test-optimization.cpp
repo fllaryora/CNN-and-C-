@@ -462,6 +462,131 @@ std::vector<double> newWeights = {
 
 }
 
+// Test the backwardForOutputLayer method
+void testBackwardForOutputLayer() {
+    int numInputs = 3;
+    int numNeurons = 1;  // Single neuron for simplicity
+    ActivationFunction activation = ActivationFunction::SIGMOID;
+    LossFunction loss = LossFunction::MSE;
+    OptimizationAlgorithm optimizationSGD = OptimizationAlgorithm::SGD;
+    OptimizationAlgorithm optimizationAdam = OptimizationAlgorithm::ADAM;
+    bool useBias = true;
+    // Set a fixed learning rate
+    double learningRate = 0.1;
+    int epoch = 1;
+
+
+    // Initialize the layer for SGD
+    OptimizedFullyConnectedLayer layerSGD(numInputs, numNeurons,
+       activation, loss, useBias,
+        optimizationSGD);
+
+    // Initialize the layer for Adam
+    OptimizedFullyConnectedLayer layerAdam(numInputs, numNeurons,
+       activation, loss, useBias, optimizationAdam);
+
+
+
+    // Manually set weights and biases for deterministic behavior
+    double* weightsSGD = layerSGD.getWeights();
+    double* biasesSGD = layerSGD.getBiases();
+
+    double* weightsAdam = layerAdam.getWeights();
+    double* biasesAdam = layerAdam.getBiases();
+
+    // Example weights for both layers
+    weightsSGD[getEntryAndNeuronIndex(0,0,numInputs)] = 0.1;
+    weightsSGD[getEntryAndNeuronIndex(1,0,numInputs)] = 0.2;
+    weightsSGD[getEntryAndNeuronIndex(2,0,numInputs)] = 0.3;
+
+    weightsAdam[getEntryAndNeuronIndex(0,0,numInputs)] = 0.1;
+    weightsAdam[getEntryAndNeuronIndex(1,0,numInputs)] = 0.2;
+    weightsAdam[getEntryAndNeuronIndex(2,0,numInputs)] = 0.3;
+
+    // Example biases for both layers
+    biasesSGD[0] = 0.1;
+    biasesAdam[0] = 0.1;
+
+    // Define input and expected output
+    std::vector<double> input = {1.0, 2.0, 3.0};
+    std::vector<double> expected = {0.25};
+
+    // Call backwardForOutputLayer for SGD
+    layerSGD.backwardForOutputLayer(input, expected, learningRate, epoch);
+
+    //calculating the expected new weights by hand
+    //{1.5} <= zPreactivation({1.0, 2.0, 3.0});
+    // {	0.817574} = forward({1.0, 2.0, 3.0});
+    // {0.567574} = lossDerivative({	0.817574}, {0.25});
+    //computeNewDeltasForOutputLayer({0.6668273035}, {2.4})
+    // -0.75 = activationDerivative(zPreactivationArray, neuronIndex);
+    //deltas[0] = {0.567574} * {-0.75}
+    //delta = -0.4256805
+    //gradients[0] = -0.4256805
+    //gradients[1] = -0.851361
+    //gradients[2] = -1.2770415
+    //weights[0] = 0.1 - 0.1 * (-0.4256805); = 0.14256805
+    //weights[1] = 0.2 - 0.1 * (-0.851361); = 0.2851361
+    //weights[1] = 0.3 - 0.1 * (-1.2770415); = 0.42770415
+
+    //biases[0] = 0.1 -  -0.04256805 = 0.14256805
+    // Get updated weights and biases
+    double* updatedWeightsSGD = layerSGD.getWeights();
+    double* updatedBiasesSGD = layerSGD.getBiases();
+
+    // Expected values after backward pass for SGD
+    std::vector<double> expectedWeightsSGD = {
+      0.142568, 0.285136, 0.427704
+     };
+
+     // Check if updated weights and biases match expected values for SGD
+     std::cout << "SGD Weights: ";
+     for (int i = 0; i < numInputs * numNeurons; ++i) {
+       std::cout << updatedWeightsSGD[i] << " ";
+         assert(std::fabs(updatedWeightsSGD[i] - expectedWeightsSGD[i]) < 1e-6);
+     }
+     std::cout << std::endl;
+     std::vector<double> expectedBiasesSGD = {0.14256805};
+
+
+     std::cout << "SGD Biases: ";
+     for (int i = 0; i < numNeurons; ++i) {
+         std::cout << updatedBiasesSGD[i] << " ";
+         assert(std::fabs(updatedBiasesSGD[i] - expectedBiasesSGD[i]) < 1e-6);
+     }
+     std::cout << std::endl;
+
+
+    // Call backwardForOutputLayer for Adam
+    layerAdam.backwardForOutputLayer(input, expected, learningRate, epoch);
+
+    double* updatedWeightsAdam = layerAdam.getWeights();
+    double* updatedBiasesAdam = layerAdam.getBiases();
+
+    // Expected values after backward pass for Adam
+    std::vector<double> expectedWeightsAdam = {0.1 + 0.1, 0.2 + 0.1, 0.3 + 0.1,
+                                                0.4 + 0.1, 0.5 + 0.1, 0.6 + 0.1};
+    std::vector<double> expectedBiasesAdam = {0.1 + 0.1, 0.2 + 0.1};
+
+
+    // Check if updated weights and biases match expected values for Adam
+    std::cout << "Adam Weights: ";
+    for (int i = 0; i < numInputs * numNeurons; ++i) {
+        std::cout << updatedWeightsAdam[i] << " ";
+        assert(std::fabs(updatedWeightsAdam[i] - expectedWeightsAdam[i]) < 1e-6);
+    }
+    std::cout << std::endl;
+
+    std::cout << "Adam Biases: ";
+    for (int i = 0; i < numNeurons; ++i) {
+        std::cout << updatedBiasesAdam[i] << " ";
+        assert(std::fabs(updatedBiasesAdam[i] - expectedBiasesAdam[i]) < 1e-6);
+    }
+    std::cout << std::endl;
+
+    std::cout << "Backward for Output Layer test passed!" << std::endl;
+}
+
 int main() {
     // Run the test
     testPreactivation();
@@ -471,5 +596,6 @@ int main() {
     testGenerateGradients();
     testUpdateWeightsSGD();
     testUpdateWeightsADAM();
+    testBackwardForOutputLayer();
     return 0;
 }
