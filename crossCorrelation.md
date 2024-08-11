@@ -111,7 +111,24 @@ We multiply "rows" against "columns".
 
 **We can emulte a cross correlation with a matric multiplication but this is a waste of space and computation:**
 Let us supose a 2x2 kernel.
-![saf](https://latex.codecogs.com/svg.image?\begin{bmatrix}a_{11}&a_{12}&\cdots&a_{33}\end{bmatrix}\times\begin{bmatrix}k_{11}&0&0&0\\k_{12}&k_{11}&0&0\\0&k_{12}&0&0\\k_{21}&0&k_{11}&0\\k_{22}&k_{21}&k_{12}&k_{11}\\0&k_{22}&0&k_{12}\\0&0&k_{21}&0\\0&0&k_{22}&k_{21}\\0&0&0&k_{22}\end{bmatrix})
+
+![safaa](https://latex.codecogs.com/svg.image?\begin{bmatrix}a_{11}&a_{12}&\cdots&a_{33}\end{bmatrix}\times\begin{bmatrix}k_{11}&0&0&0\\k_{12}&k_{11}&0&0\\0&k_{12}&0&0\\k_{21}&0&k_{11}&0\\k_{22}&k_{21}&k_{12}&k_{11}\\0&k_{22}&0&k_{12}\\0&0&k_{21}&0\\0&0&k_{22}&k_{21}\\0&0&0&k_{22}\end{bmatrix})
+
+$$ \begin{bmatrix}
+ a_{11} & a_{12} & \cdots & a_{33} 
+\end{bmatrix}
+\times
+\begin{bmatrix}
+ k_{11} & 0      & 0      & 0\\
+ k_{12} & k_{11} & 0      & 0\\ 
+ 0      & k_{12} & 0      & 0\\
+ k_{21} & 0      & k_{11} & 0\\
+ k_{22} & k_{21} & k_{12} & k_{11}\\
+ 0      & k_{22} & 0      & k_{12}\\
+ 0      & 0      & k_{21} & 0\\
+ 0      & 0      & k_{22} & k_{21}\\
+ 0      & 0      & 0      & k_{22}
+\end{bmatrix}$$
 
 For 9 *words* (a word is the amount of bits that naturally take the cpu at time) we have a lot of useless 0s.
 Now if we have an image of some kilobites, we have a Megas wasted.
