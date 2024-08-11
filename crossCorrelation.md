@@ -83,12 +83,19 @@ For the row i, and column j, C colors:
 
 ![fsdf](https://latex.codecogs.com/svg.image?(A&space;\star&space;W)[i][j]=\sum_{i'=0}^{k-1}\sum_{j'=0}^{k-1}\sum_{c=0}^{C-1}&space;A[i+i'][j+j'][c]&space;W[c][i][j])
 
-In most case when you read a pixel from a photo file for each channel (red, blue , green, alpha/transparency ) you get a value between 0 to 255 (integer).
+In most case when you read a pixel from a photo file for each channel (red, blue , green, alpha/opacity ) you get a value between 0 to 255 (integer).
 **So, please map this value to 0.0 to 1.0 (float).**
 The convolution and cross-correlation, can be seen as a small window that sits on top of the incoming data strem.
 Each time it lands on a part of the data stream it generates an output. Then it moves a bit.
 A quantity called a **stride** It lands again on another part of the data stream and generates a new output,
 and so on until it has covered the full width of the input. 
+
+### Another way to view it.
+
+<img src="cross-correlation.png" alt="Image of Cross correlation layer" />
+
+I like: this PDF http://arxiv.org/pdf/1603.07285
+
 
 # A bit of Architecture
 
@@ -98,9 +105,8 @@ The CNN layers are the layers in charge of modeling the reality to short-sighted
 So just imagine having a 1920x800 image and a first hidden layer with 100 neurons.
 those filters must be very specific to only let pass 100 significative variables.
 
-
-
 ## The cross correlation as the first layer.
+
 
 ### The change of shape of the layers (Valid, Same and Full)
 
