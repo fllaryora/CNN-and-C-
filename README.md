@@ -59,3 +59,4 @@ Please see the page to calculate the new weights of the layer: https://github.co
 ## CNN Layer
 
 Please see: https://github.com/fllaryora/CNN-and-C-/blob/main/crossCorrelation.md
+Please see: https://github.com/fllaryora/CNN-and-C-/blob/main/crossCorrelation-second-Part.md
