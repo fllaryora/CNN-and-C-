@@ -167,4 +167,125 @@ You only want to know, whether or not there is a fucking nose at the input, noth
 
 ### The change of shape of the layers (Valid, Same and Full)
 
+In this section I will discuss the reduction in size that the input matrix goes through
+ with respect to the size of the matrix cross correlated.
+ 
+To calculate the size of the output array, it is done on a dimension by dimension basis.
+Always using the matching dimensions. Width with width, height with height, time with time.
+
+To calculate the size of the output array, furthermore, it must be known, which variations of the cross-correlation are to be applied to the process. 
+There are 3 "spices" applied to cross correlation: **padding**, **stride** and **dilatation**.
+
+- For example the input data stream is small with respect to the kernel, the input is usually surrounded by zeros, so that the output is more representative, this is called **padding**.
+- On the other hand, if I want the window (the kernel), after applying the calculation for a sector, to move not by one element, but by 2 or 3 or more elements, this is called **stride**.
+- **Dilated** convolutions are designed to expand receptive fields while maintaining spatial resolution.t is a technique that expands the kernel by inserting holes between its consecutive elements.
+
+
+For each dimension, the input parameters are: 
+-The size of the input (e.g. the width of the input). N
+-The size of the kernel (e.g. the width of the kernel). K
+- The padding p applied.
+- The applied stride s.
+- The applied dilatation d.
+- The size of the output (e.g. the width of the output). O
+
+#### Most common case
+Without padding (P=0), Without stride (S=1), Without dilatation:
+
+$$O = N - K + 1$$
+
+#### With padding
+With padding (P!=0), Without stride (S=1), Without dilatation:
+
+$$O = N + 2P - K + 1$$
+
+#### SAME
+Special case Half padding or **Same** padding (The output is the same size of )
+Without stride (S=1), Without dilatation:
+
+For any K odd (K = 2n+1)
+
+(P = floor (K/2) = n )
+
+$$O = N + 2P - K + 1$$
+
+$$O = N + 2n - (K - 1)$$
+
+$$O = N + 2n - 2n$$
+
+$$O = N$$
+
+
+#### FULL
+While convolving a kernel generally decreases the output size with respect to
+the input size, sometimes the opposite is required. This can be achieved with
+proper zero padding. Without stride (S=1), Without dilatation:
+(P = K - 1 )
+
+$$O = N + 2P - K + 1$$
+
+$$O = N + 2(K - 1) - (K - 1)$$
+
+$$O = N + (K - 1)$$
+
+
+#### With stride
+Without padding (P=0), With stride (S!=1), Without dilatation:
+
+![dasd](https://latex.codecogs.com/svg.image?O=\left\lfloor\frac{N-K}{S}\right\rfloor&plus;1)
+
+
+#### VALID
+With padding and stride:
+Without dilatation:
+
+![dasd](https://latex.codecogs.com/svg.image?O=\left\lfloor\frac{(N&plus;2P)-K}{S}\right\rfloor&plus;1)
+
+#### With Dilatation
+Dilation is used to increase the receptive field of the filter without increasing its size.
+If D is the dilation, it means inserting D−1 zeros between each element of the filter.
+
+If:
+
+$$N' = N +2P$$
+
+I can say:
+![dasd](https://latex.codecogs.com/svg.image?O=\left\lfloor\frac{N'-K'}{S}\right\rfloor&plus;1)
+
+IF:
+$$K' = (D-1)(K-1) + K $$
+Where (D-1)(K-1) are the news 0s added.
+
+This is the effective filter size considering dilation:
+$$K' = D(K-1) + 1 $$
+
+![dasd](https://latex.codecogs.com/svg.image?O=\left\lfloor\frac{N+2P-D(K-1)-1}{S}\right\rfloor&plus;1)
+
+## Activation function layer after the cross correlation layer
+The purpose of activation functions is mainly to add non-linearity to the network, which otherwise would be only a linear model.
+
+Due to the similarity of the cross correlation with the dot product, the activation functions favourites here are:
+- ReLU
+- Leaky ReLU (with alpha = 0.01).
+
+With 1 bias per cross correlation layer. For example for 3 dimentional 1 bias per color in that cross correlation layer.
+
+$$ /sigma (x \star w + b) = output$$
+
+There is no modification of the size here.
+
+## Pooling layer after Activation function layer
+
+We really need to reduce the size of the output in order to fit the first fully conected layer.
+We can archieve this with average pooling or the most commonlly used the max-pooling.
+
+**Max pooling**, which consistsin splitting the input in (usually non-overlapping) patches and outputting the
+maximum value of each patch. Other kinds of pooling exist, e.g., mean or **average pooling**,
+which all share the same idea of aggregating the input locally by applying a non-linearity to the content of some patches 
+
+The new output is:
+![dasd](https://latex.codecogs.com/svg.image?O=\left\lfloor\frac{N-K}{S}\right\rfloor&plus;1)
+
+![fsdf](https://latex.codecogs.com/svg.image?O[i][j]=max(&space;A[i\dot&space;K][j\dot&space;K],\cdots,A[(i\dot&space;K)+i'][(j\dot&space;K)+j']))
+
 I like: this PDF http://arxiv.org/pdf/1603.07285
