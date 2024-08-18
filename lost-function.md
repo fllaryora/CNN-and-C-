@@ -83,9 +83,23 @@ $$\frac{\partial \text{MSE}}{\partial \hat{y}_k^{(L)}} = \frac{-2}{n} (y_k - \ha
 ### Derivative of MSE with Respect to Hideen Layer Weights $$W_{ij}^{(l)}$$
 
 Propagate the error backward through the network. For each hidden layer, compute the error (gradient) with respect to the output of that layer using the error from the next layer and the weights connecting the layers.
- 
-The error in the hidden layer is calculated by propagating the next layer error back through the weights, applying the chain rule. The layer l has I neurons index i, and the layer l+1 has K neuton index k.
 
+ 
+The error in the hidden layer is calculated by propagating the next layer error back through the weights, applying the **multiple dependency chain rule**.
+
+#### Multiple dependency chain rule
+The best source who taught me **multiple dependency chain rule** was: https://towardsdatascience.com/backpropagation-in-fully-convolutional-networks-fcns-1a13b75fb56a
+
+<img src="https://miro.medium.com/v2/resize:fit:1100/format:webp/0*mdLE-DK08v_Ffm59.png" alt="Image of a neuron" />
+
+Let $$a_1(t)$$ and $$a_2(t)$$ be differentiable functions in t and $$z(a_1(t), a_2(t))$$ a differentiable function in $$a_1$$ and $$a_2$$. The derivative of z to t is:
+
+$$\frac{\partial z}{\partial t} = \frac{\partial z}{\partial a_1} \cdot \frac{\partial a_1}{\partial t} + \frac{\partial z}{\partial a_2} \cdot \frac{\partial a_2}{\partial t}$$
+
+
+### Derivative of MSE with Respect to Hideen Layer Weights $$W_{ij}^{(l)}$$
+
+The layer l has I neurons index i, and the layer l+1 has K neuton index k.
 
 ![dsad](https://latex.codecogs.com/svg.image?\frac{\partial\text{MSE}}{\partial&space;W_{ij}^{(l)}}=\sum_{k=1}^{K}\left(\frac{\partial\text{MSE}}{\partial&space;z_{k}^{(l&plus;1)}}\cdot\frac{\partial&space;z_k^{(l&plus;1)}}{\partial&space;x_{i}^{(l)}}\right)\cdot\frac{\partial&space;x_i^{(l)}}{\partial&space;z_{i}^{(l)}}\cdot\frac{\partial&space;z_i^{(l)}}{\partial&space;W_{ij}^{(l)}})
 
