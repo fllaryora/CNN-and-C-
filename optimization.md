@@ -9,6 +9,8 @@ The equations are for one single layer output layer or hidden layer,
 And The magic happens moving backward from the output layer to the first layer.
 Moving from the output layer to the first layer let us avoid redundant calculations of intermediate terms in the chain rule;
 
+Backpropagation is backward propagation of errors.
+
 ## Gradient descent
 
 Optimizing an objective function.
@@ -28,6 +30,7 @@ In the epoch t=0, the values of W are defined randomly.
 ![sdasd](https://latex.codecogs.com/svg.image?W^{(l)}_{jkt}=W^{(l)}_{jk(t-1)}-\eta\frac{\partial&space;L}{\partial&space;W^{(l)}_{jk(t-1)}})
 
 For the bias
+
 ![sdasd](https://latex.codecogs.com/svg.image?b^{(l)}_{kt}=b^{(l)}_{k(t-1)}-\eta\frac{\partial&space;L}{\partial&space;b^{(l)}_{k(t-1)}})
 
 Explore **eta** values around 0.01.
