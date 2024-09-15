@@ -6,6 +6,24 @@
 #define STB_IMAGE_WRITE_IMPLEMENTATION
 #include "stb_image_write.h" // to save images
 
+#include <cassert>
+#include <cmath> // Para usar fabs
+
+void assertEqual(const std::vector<std::vector<float>>& vec1, const std::vector<std::vector<float>>& vec2, float epsilon = 1e-5) {
+    // Verificar que las dimensiones externas sean iguales
+    assert(vec1.size() == vec2.size() && "Vectors have different outer sizes!");
+
+    // Verificar que las dimensiones internas sean iguales
+    for (size_t row = 0; row < vec1.size(); ++row) {
+        assert(vec1[row].size() == vec2[row].size() && "Vectors have different inner sizes at a specific row!");
+
+        // Verificar que cada valor sea aproximadamente igual (considerando precisión)
+        for (size_t col = 0; col < vec1[row].size(); ++col) {
+            assert(fabs(vec1[row][col] - vec2[row][col]) <= epsilon && "Vectors have different values!");
+        }
+    }
+}
+
 std::vector<std::vector<float>> convertToGrayscale(unsigned char* image, int width, int height, int channels) {
     std::vector<std::vector<float>> grayscaleImage(height, std::vector<float>(width));
     for (int y = 0; y < height; ++y) {
@@ -208,5 +226,29 @@ int main() {
     stbi_image_free(image);
 
     std::cout << "Convolución aplicada y guardada en 'output.png'\n";
+
+    Convolution test(2, 2, 1, 0, 2, lineal);
+    std::vector<std::vector<float>> testMatrix = {
+        {10, 25,1,5},
+        {20, 32, 52,1},
+        {6, 4, 9,40},
+        {16, 13, 17,29}
+    };
+
+    std::vector<std::vector<float>> testKernel = {
+        {1, 0},
+        {1, 0}
+    };
+
+    std::vector<std::vector<float>> testExpected = {
+        {30, 57,53},
+        {26, 36, 61},
+        {22, 17,26}
+    };
+
+    std::vector<std::vector<float>> actualResult = test.applyCrossCorrelation(testMatrix, testKernel);
+
+    assertEqual(actualResult, testExpected);
+
     return 0;
 }
