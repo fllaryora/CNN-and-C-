@@ -24,6 +24,15 @@ void assertEqual(const std::vector<std::vector<float>>& vec1, const std::vector<
     }
 }
 
+void printMatrix(const std::vector<std::vector<float>>& matrix) {
+    for (const auto& row : matrix) {
+        for (const auto& element : row) {
+            std::cout << element << " ";
+        }
+        std::cout << std::endl;
+    }
+}
+
 std::vector<std::vector<float>> convertToGrayscale(unsigned char* image, int width, int height, int channels) {
     std::vector<std::vector<float>> grayscaleImage(height, std::vector<float>(width));
     for (int y = 0; y < height; ++y) {
@@ -227,12 +236,18 @@ int main() {
 
     std::cout << "Convolución aplicada y guardada en 'output.png'\n";
 
-    Convolution test(2, 2, 1, 0, 2, lineal);
+    Convolution test(
+      2, 2, //krnel 2x2
+       1, //S
+        0, //P
+        2,// 2x2 Maxpool
+         lineal);
+
     std::vector<std::vector<float>> testMatrix = {
-        {10, 25,1,5},
-        {20, 32, 52,1},
-        {6, 4, 9,40},
-        {16, 13, 17,29}
+        {10, 25,  1,  5},
+        {20, 32, 52,  1},
+        { 6,  4,  9, 40},
+        {16, 13, 17, 29}
     };
 
     std::vector<std::vector<float>> testKernel = {
@@ -246,9 +261,36 @@ int main() {
         {22, 17,26}
     };
 
+    std::vector<std::vector<float>> testConvoExpected = {
+        {57,53, 6},
+        {36, 61, 41},
+        {17,26, 69}
+    };
+
+    std::vector<std::vector<float>> maxExpected = {
+        {57 }
+    };
+
     std::vector<std::vector<float>> actualResult = test.applyCrossCorrelation(testMatrix, testKernel);
-
     assertEqual(actualResult, testExpected);
+    std::cout << "cross correlation aplicada \n";
 
+    std::vector<std::vector<float>> actualResult2 = test.applyConvolution(testMatrix, testKernel);
+
+    assertEqual(actualResult2, testConvoExpected);
+    std::cout << "Convolución aplicada \n";
+
+    std::vector<std::vector<float>> actualResult3 = test.applyMaxPooling(actualResult);
+    printMatrix(actualResult3);
+    assertEqual(actualResult3, maxExpected);
+
+
+    std::vector<std::vector<float>> testMatrixMaxPoolExpected = {
+        {32,  52},
+        { 16,  40}
+    };
+    std::vector<std::vector<float>> actualResult4 = test.applyMaxPooling(testMatrix);
+    printMatrix(actualResult4);
+    assertEqual(actualResult4, testMatrixMaxPoolExpected);
     return 0;
 }

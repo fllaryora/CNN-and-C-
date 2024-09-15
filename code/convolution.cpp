@@ -147,8 +147,8 @@ std::vector<std::vector<float>> Convolution::applyMaxPooling(
 
             float maxValue = inputData[inputHeightIndex][inputWidthIndex];
 
-            for (int poolHeightIndex = 1; poolHeightIndex < poolSize; ++poolHeightIndex) {
-                for (int poolWidthIndex = 1; poolWidthIndex < poolSize; ++poolWidthIndex) {
+            for (int poolHeightIndex = 0; poolHeightIndex < poolSize; ++poolHeightIndex) {
+                for (int poolWidthIndex = 0; poolWidthIndex < poolSize; ++poolWidthIndex) {
                     int inputHeightIndex = outputHeightIndex * poolSize + poolHeightIndex;
                     int inputWidthIndex = outputWidthIndex * poolSize + poolWidthIndex;
 
